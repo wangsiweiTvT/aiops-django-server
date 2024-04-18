@@ -1,5 +1,5 @@
 from django.apps import AppConfig
-from gensim.models import KeyedVectors
+# from gensim.models import KeyedVectors
 
 wv_from_text=dict()
 class WordembeddingConfig(AppConfig):

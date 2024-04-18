@@ -3,10 +3,24 @@ import pandas as pd
 from adtk.data import validate_series
 from adtk.detector import SeasonalAD
 from rest_framework.views import APIView
-from django.contrib.staticfiles import storage
 from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
-
+from pypots.imputation import SAITS
+saits = SAITS(
+    n_steps=48,
+    n_features=37,
+    n_layers=2,
+    d_model=256,
+    d_ffn=128,
+    n_heads=4,
+    d_k=64,
+    d_v=64,
+    dropout=0.1,
+    epochs=10,
+    # saving_path="examples/saits", # set the path for saving tensorboard logging file and model checkpoint
+    # model_saving_strategy="best", # only save the model with the best validation performance
+)
+saits.load(str(BASE_DIR) + "/static/SAITS.pypots")
 class Detector(APIView):
     def get(self,request):
         # 读取 CSV 文件
@@ -63,4 +77,6 @@ class Detector(APIView):
         return JsonResponse({"x":x,"y":y,"mark_points":mark_points})
 
 
-
+class Impute(APIView):
+    def get(self,request):
+        return JsonResponse({})
