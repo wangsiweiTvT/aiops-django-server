@@ -42,8 +42,8 @@ class Detector(APIView):
         feature_series_int = feature_series.interpolate()
 
         # 创建一个简单的时间索引
-        time_index = pd.date_range(start="2024-01-01", periods=len(feature_series_int), freq="D")
-
+        time_index = pd.date_range(start="2022-03-19 16:00:00", periods=len(feature_series_int), freq="1min")
+        print(time_index)
         # 使用 adtk 进行数据验证
         feature_series_int = validate_series(pd.Series(data=feature_series_int.values, index=time_index))
 

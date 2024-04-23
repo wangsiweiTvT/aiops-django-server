@@ -153,3 +153,6 @@ CORS_ALLOW_HEADERS = (
     'x-csrftoken',
     'x-requested-with',
 )
+
+PORT = 8848  # 你的 Django 服务端口
+DOMAIN = '127.0.0.1'  # 你的 Django 服务域名或IP
